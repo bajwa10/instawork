@@ -10,7 +10,7 @@
    1) Install virtualenv
    ```pip install virtualenv```  
    2) Initialize a virtual environment 
-   ```virtualenv "environment_name"```
+   ```virtualenv venv```
    3) Activate the virtual environment
    ```source bin/activate```
    4) Install the project requirements
