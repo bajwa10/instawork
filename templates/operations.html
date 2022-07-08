@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <h1><b>{{ spec.heading }}</b></h1>
+    <h4>{{ spec.sub_heading }}</h4>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if spec.is_edit %}
+            <button type="submit" onclick="onClicked(event,'Delete')" name="delete" class="btn btn-danger"> Delete
+            </button>
+        {% endif %}
+        <button type="submit" onclick="onClicked(event,'{{ spec.button_name }}')"
+                class="btn btn-primary"> {{ spec.button_name }} </button>
+    </form>
+
+    <script>
+        function onClicked(event, action) {
+            if (!confirm("Confirm " + action + "?")) {
+                event.preventDefault();
+            }
+        }
+    </script>
+
+{% endblock %}
