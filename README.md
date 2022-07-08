@@ -15,5 +15,7 @@
    ```source bin/activate```
    4) Install the project requirements
    ```pip install -r requirements.txt```
-3) Run ```python3 manage.py runserver``` to run the server
-4) Click on the server link
+3) Make migrations ```python3 manage.py makemigrations```
+4) Migrate ```python3 manage.py migrate```
+5) Run ```python3 manage.py runserver``` to run the server
+6) Click on the server link
