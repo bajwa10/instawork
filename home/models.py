@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
+from django.utils.safestring import SafeString
 
 from .enums import RegexValidators, Roles
 
@@ -12,11 +13,11 @@ class Member(models.Model):
     role = models.CharField(max_length=32, choices=Roles.CHOICES.value, default=Roles.DEFAULT.value)
     canDelete = models.BooleanField(default=False)
 
-    def list_view_data(self):
+    def list_view_data(self) -> SafeString:
         return format_html(
             f"<b>{self.first_name} {self.last_name} {'(' + self.role + ')' if self.role in Roles.CAN_DELETE.value else ''}</b><br>{self.number}<br>{self.email}")
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if self.role in Roles.CAN_DELETE.value:
             self.canDelete = True
         super().save(*args, **kwargs)

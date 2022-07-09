@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views.decorators.cache import never_cache
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.core.handlers.wsgi import WSGIRequest
 from dataclasses import dataclass
+from typing import Union
 from .forms import MemberForm
 from .models import Member
 
@@ -20,7 +23,7 @@ class HomeList(ListView):
     template_name = "home.html"
 
 
-def add_member(request):
+def add_member(request: WSGIRequest) -> Union[HttpResponseRedirect, HttpResponse]:
     form = MemberForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -32,7 +35,7 @@ def add_member(request):
 
 
 @never_cache
-def edit_member(request, member_id):
+def edit_member(request: WSGIRequest, member_id: str) -> Union[HttpResponseRedirect, HttpResponse]:
     if not Member.objects.filter(pk=member_id):
         return redirect('/')
     member = Member.objects.get(pk=member_id)
