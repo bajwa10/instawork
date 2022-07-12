@@ -1,8 +1,8 @@
-from django.test import TransactionTestCase
 from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
-from .models import Member
-from .enums import Roles
+from django.test import TransactionTestCase
+
+from .models import Member, ROLES
 
 
 class MemberTest(TransactionTestCase):
@@ -26,7 +26,7 @@ class MemberTest(TransactionTestCase):
                                    'number': ['1234567891', '8752571581', '5257156297'],
                                    'email': ['test@gmail.com', 'test.test@gmail.com', 'test123@gmail.com',
                                              'test.123@gmail.com', 'test.test.test@gmail.com', 'test.123.te@gmail.com'],
-                                   'role': [value[0] for value in Roles.CHOICES.value]}
+                                   'role': [value[0] for value in ROLES]}
 
     def testInvalidFields(self) -> None:
         for field in self.fields:

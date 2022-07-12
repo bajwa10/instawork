@@ -5,8 +5,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.handlers.wsgi import WSGIRequest
 from dataclasses import dataclass
 from typing import Union
-from .forms import MemberForm
-from .models import Member
+from .models import Member, MemberForm
 
 
 @dataclass
@@ -46,7 +45,7 @@ def edit_member(request: WSGIRequest, member_id: str) -> Union[HttpResponseRedir
     if form.is_valid():
         form.save()
         return redirect('/')
-    spec = OperationsHTML(button_name='Edit', heading='Edit team member', sub_heading='Edit name, contact info and role'
-                          , is_edit=True)
+    spec = OperationsHTML(button_name='Edit', heading='Edit team member',
+                          sub_heading='Edit name, contact info and role', is_edit=True)
     context = {'form': form, 'spec': spec}
     return render(request, 'operations.html', context)
