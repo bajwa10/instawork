@@ -2,7 +2,7 @@
 
 **Instructions to run the project**
 
-**Pre-req** - ```python3, pip, git```
+**Pre-req** - ```python 3.9, pip, git```
 
 1) Clone the repo 
 ``git clone https://github.com/bajwa10/instawork``
