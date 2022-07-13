@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <button type="submit"
-            onclick="location.href='{% url 'add' %}'" class="btn btn-outline-primary"
+            onclick="location.href='{% url 'add-member' %}'" class="btn btn-outline-primary"
             style="top: 0; right: 0; position: absolute; margin-top: 5px"> +
     </button>
     <h2><b>Team Members</b></h2>
@@ -11,7 +11,7 @@
         <hr/>
         {% for object in object_list %}
             <button class="btn btn-outline-dark" style="width: 100%"
-                    onclick="location.href='{% url 'edit_member' member_id=object.id %}'">{{ object.list_view_data }}</button>
+                    onclick="location.href='{% url 'edit-member' pk=object.id %}'">{{ object.list_view_data }}</button>
             <hr/>
 
         {% endfor %}
