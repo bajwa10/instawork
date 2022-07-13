@@ -26,6 +26,11 @@ class EditMemberView(UpdateView):
     form_class = MemberForm
     success_url = '/'
 
+    def get(self, request, *args, **kwargs):
+        if not Member.objects.filter(pk=self.kwargs.get('pk')):
+            return redirect('/')
+        return super(EditMemberView, self).get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         if 'delete' in request.POST:
             Member.objects.get(pk=self.kwargs.get('pk')).delete()
